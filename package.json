@@ -1,0 +1,19 @@
+{
+  "name": "friendly-names",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "friendly-words": "^1.1.10",
+    "micro-cors": "^0.1.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  }
+}

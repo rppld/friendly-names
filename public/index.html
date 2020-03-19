@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Friendly Names</title>
+    <script>
+      onload = async () => {
+        const root = document.getElementById('root')
+        const res = await fetch('/api/generate?count=3')
+        const names = await res.json()
+        names.forEach(name => {
+          const el = document.createElement('pre')
+          el.textContent = name
+          root.appendChild(el)
+        })
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
