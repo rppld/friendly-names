@@ -5,10 +5,42 @@
     <title>Friendly Names</title>
     <link rel="stylesheet" href="style.css" />
     <script>
-      onload = async () => {
-        const input = document.querySelector('input')
-        const res = await fetch('/api/generate')
-        input.value = await res.json()
+      let input = null
+      let regenerateButton = null
+      let copyButton = null
+      const generate = async () => {
+        const name = await fetch('/api/generate')
+        input.value = await name.text()
+      }
+      const updateCopyButtonLabel = () => {
+        const primaryLabel = copyButton.textContent
+        copyButton.textContent = 'Copied'
+        setTimeout(() => {
+          copyButton.textContent = primaryLabel
+        }, 1000)
+      }
+      const copyToClipboard = () => {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(input.value).then(function() {
+            updateCopyButtonLabel()
+          })
+        } else {
+          input.select()
+          document.execCommand('copy')
+          updateCopyButtonLabel()
+        }
+      }
+      onload = () => {
+        input = document.querySelector('input')
+        regenerateButton = document.querySelector('[data-regenerate]')
+        copyButton = document.querySelector('[data-copy]')
+        generate()
+        regenerateButton.addEventListener('click', generate)
+        copyButton.addEventListener('click', copyToClipboard)
+      }
+      onkeypress = async e => {
+        if (e.keyCode === 114) generate()
+        if (e.keyCode === 99) copyToClipboard()
       }
     </script>
   </head>
@@ -17,7 +49,7 @@
       <header>
         <h1>Friendly Names</h1>
         <h2>
-          Generates a random name from Glitch’s
+          Generate a random name from Glitch’s
           <a href="https://www.npmjs.com/package/friendly-words"
             >friendly-words</a
           >
@@ -25,8 +57,23 @@
         </h2>
       </header>
       <input readonly />
+      <div class="button-group">
+        <button data-regenerate class="primary">Regenerate</button>
+        <button data-copy>Copy</button>
+      </div>
+      <div class="keyboard-instructions">
+        <h3>Keyboard</h3>
+        <p><kbd>R</kbd> regenerate</p>
+        <p><kbd>C</kbd> copy</p>
+      </div>
       <footer>
-        <p><kbd>Cmd</kbd><span>+</span><kbd>R</kbd> to re-generate.</p>
+        <p>
+          <small
+            >Made by Philipp.
+            <a href="https://github.com/rppld/friendly-names">View on GitHub</a
+            >.</small
+          >
+        </p>
       </footer>
     </div>
   </body>
