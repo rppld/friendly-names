@@ -38,7 +38,7 @@
         regenerateButton.addEventListener('click', generate)
         copyButton.addEventListener('click', copyToClipboard)
       }
-      onkeypress = async e => {
+      onkeypress = e => {
         if (e.keyCode === 114) generate()
         if (e.keyCode === 99) copyToClipboard()
       }
