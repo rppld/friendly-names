@@ -45,6 +45,7 @@ a {
 
 input {
   border: 2px solid #ccc;
+  -webkit-appearance: none;
   appearance: none;
   font-family: inherit;
   display: block;
