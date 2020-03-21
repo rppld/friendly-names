@@ -1,6 +1,6 @@
 # Friendly Names
 
-Generates three random names from Glitch’s [`friendly-words`](https://www.npmjs.com/package/friendly-words) package.
+Generates a random name from Glitch’s [`friendly-words`](https://www.npmjs.com/package/friendly-words) package.
 
 ## Inspiration
 

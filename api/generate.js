@@ -2,7 +2,7 @@ const words = require('friendly-words')
 const microCors = require('micro-cors')
 const cors = microCors({ allowMethods: ['GET'] })
 
-function generate(count = 1, separator = '-') {
+function generate(count = 1, delimiter = '-') {
   const { predicates, objects } = words
   const pCount = predicates.length
   const oCount = objects.length
@@ -13,13 +13,13 @@ function generate(count = 1, separator = '-') {
       predicates[Math.floor(Math.random() * pCount)],
       objects[Math.floor(Math.random() * oCount)],
     ]
-    output.push(pair.join(separator))
+    output.push(pair.join(delimiter))
   }
 
   return output
 }
 
 module.exports = cors((req, res) => {
-  const { count, separator } = req.query
-  res.json(generate(count, separator))
+  const { count, delimiter } = req.query
+  res.json(generate(count, delimiter))
 })

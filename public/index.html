@@ -1,20 +1,33 @@
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Friendly Names</title>
+    <link rel="stylesheet" href="style.css" />
     <script>
       onload = async () => {
-        const root = document.getElementById('root')
-        const res = await fetch('/api/generate?count=3')
-        const names = await res.json()
-        names.forEach(name => {
-          const el = document.createElement('pre')
-          el.textContent = name
-          root.appendChild(el)
-        })
+        const input = document.querySelector('input')
+        const res = await fetch('/api/generate')
+        input.value = await res.json()
       }
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div class="container">
+      <header>
+        <h1>Friendly Names</h1>
+        <h2>
+          Generates a random name from Glitch’s
+          <a href="https://www.npmjs.com/package/friendly-words"
+            >friendly-words</a
+          >
+          package.
+        </h2>
+      </header>
+      <input readonly />
+      <footer>
+        <p><kbd>Cmd</kbd><span>+</span><kbd>R</kbd> to re-generate.</p>
+      </footer>
+    </div>
   </body>
 </html>
